@@ -40,8 +40,22 @@ function numberCards() {
   cardArray.sort(random);
   console.log(cardArray);
 
+  while (o < cards) {
+    table.innerHTML += `
+        <div class="card"
+        <div class="front-face face" onclick="turn(this)">
+        <img src="./img/parrot.png" />
+        </div>
+        <div class="back-face face">
+        <img src="${birdArray[cardArray[o]]}" />
+        </div>
+        </div>`;
+    o++;
+  }
+
+  /*
   //Front Generation
-  while (m < cards) {
+  while (o < cards) {
     table.innerHTML += `
         <div class="card" onclick="turn(this)">
         <img src="./img/parrot.png" />
@@ -57,8 +71,7 @@ function numberCards() {
     </div>`;
     o++;
   }
+  */
 }
 
-function turn(element) {
-
-}
+function turn(element) {}

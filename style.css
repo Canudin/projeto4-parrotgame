@@ -26,19 +26,39 @@ body {
   justify-content: center;
 }
 .card {
-  background-color: #a7e9af;
   height: 146px;
   width: 117px;
+  position: relative;
+}
+.face {
+  width: 100%;
+  height: 100%;
+  background-color: #a7e9af;
   border: 1px solid #99cea8;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 17px;
+  backface-visibility: hidden;
+  transition: all 0.5s;
+  transform-style: preserve-3d;
+  position: absolute;
 }
-.card img {
+.face img {
   height: 100px;
   width: 100px;
+}
+.back-face {
+  transform: rotateY(180deg);
+}
+
+.card:hover .back-face {
+  transform: rotateY(0deg);
+}
+
+.card:hover .front-face {
+  transform: rotateY(-180deg);
 }
 
 @media (max-width: 335px) {
