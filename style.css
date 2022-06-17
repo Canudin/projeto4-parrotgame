@@ -28,6 +28,7 @@ body {
 .card {
   height: 146px;
   width: 117px;
+  margin: 17px;
   position: relative;
 }
 .face {
@@ -39,11 +40,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 17px;
+  position: absolute;
   backface-visibility: hidden;
   transition: all 0.5s;
   transform-style: preserve-3d;
-  position: absolute;
 }
 .face img {
   height: 100px;
@@ -53,11 +53,19 @@ body {
   transform: rotateY(180deg);
 }
 
+/*
 .card:hover .back-face {
   transform: rotateY(0deg);
 }
 
 .card:hover .front-face {
+  transform: rotateY(-180deg);
+}
+*/
+.turnedback {
+  transform: rotateY(0deg);
+}
+.turnedfront {
   transform: rotateY(-180deg);
 }
 
