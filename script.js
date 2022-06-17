@@ -18,6 +18,9 @@ function random() {
 function numberCards() {
   let n = 0;
   let m = 0;
+  let o = 0;
+
+  //Card Number Request
   const table = document.querySelector(".table");
   table.innerHTML = "";
   cards = prompt("Qual o número de cartas que você quer jogar?");
@@ -27,6 +30,17 @@ function numberCards() {
     cards = prompt("Qual o número de cartas que você quer jogar?");
   }
 
+  //Card Array Generation
+  const loop = cards / 2;
+  while (n < loop) {
+    cardArray.push(`${idArray[n]}`);
+    cardArray.push(`${idArray[n]}`);
+    n++;
+  }
+  cardArray.sort(random);
+  console.log(cardArray);
+
+  //Front Generation
   while (m < cards) {
     table.innerHTML += `
         <div class="card" onclick="turn(this)">
@@ -35,24 +49,16 @@ function numberCards() {
     m++;
   }
 
-  const loop = cards / 2;
-  birdArray.sort(random);
-  while (n < loop) {
-    cardArray.push(`${birdArray[n]}`);
-    cardArray.push(`${birdArray[n]}`);
-    n++;
-    console.log(cardArray);
+  //Back Generation
+  while (o < cards) {
+    table.innerHTML += `
+    <div class="card" class="turned_card">
+    <img src="${birdArray[cardArray[o]]}" />
+    </div>`;
+    o++;
   }
-  cardArray.sort(random);
 }
 
 function turn(element) {
-  let m = 0;
-  while (m < cards) {
-    element.innerHTML = `
-    <div class="turned_card">
-    <img src="${cardArray[m]}" />
-    </div>`;
-    m++;
-  }
+
 }
