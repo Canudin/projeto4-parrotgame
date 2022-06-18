@@ -2,16 +2,21 @@ const birdArray = [
   "./img/goldenparrot.webp",
   "./img/parrot2.svg",
   "./img/parrot3.svg",
-  "./img/parrot4.svg",
-  "./img/parrot5.svg",
   "./img/parrot6.svg",
   "./img/quack.svg",
+  "./img/cloudcorn.png",
+  "./img/unicorn.png",
 ];
 const idArray = [0, 1, 2, 3, 4, 5, 6];
 let cardArray = [];
 let cards = 0;
 const table = document.querySelector(".table");
 let clicks = document.querySelectorAll(".clicked");
+let card1;
+let card2;
+let moves = 0;
+let score = 0;
+let time = 0;
 
 function random() {
   return Math.random() - 0.5;
@@ -61,17 +66,35 @@ function turned(element) {
   element.classList.add("clicked");
   front.classList.add("turnedfront");
   back.classList.add("turnedback");
-  while (clicks.length < 2) {
-    
+  clicks = document.querySelectorAll(".clicked");
+  if (clicks.length == 2) {
+    card1 = clicks[0].querySelector(".front-face");
+    card2 = clicks[1].querySelector(".front-face");
+    card1class = card1.classList[2];
+    card2class = card2.classList[2];
+    if (card1class === card2class) {
+      card1.removeAttribute("onclick");
+      card2.removeAttribute("onclick");
+      score++;
+      document.querySelector(".score").innerHTML = `Score: ${score}/${cards / 2}`;
+      clicks[0].classList.remove("clicked");
+      clicks[1].classList.remove("clicked");
+    }
+    if (card1class !== card2class) {
+      setTimeout(unturn, 1000);
+    }
+    moves++;
+    document.querySelector(".moves").innerHTML = `Moves: ${moves}`;
   }
-  setTimeout(unturn, 1000);
 }
 
-function unturn(){
-  const element = document.querySelector(".clicked");
-  const back = element.querySelector(".back-face");
-  const front = element.querySelector(".front-face");
-  element.classList.remove("clicked");
-  front.classList.remove("turnedfront");
-  back.classList.remove("turnedback");
+function unturn() {
+  const element = document.querySelectorAll(".clicked");
+  for (let n = 0; n < element.length; n++) {
+    const back = element[n].querySelector(".back-face");
+    const front = element[n].querySelector(".front-face");
+    element[n].classList.remove("clicked");
+    front.classList.remove("turnedfront");
+    back.classList.remove("turnedback");
+  }
 }

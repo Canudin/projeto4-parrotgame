@@ -53,20 +53,33 @@ body {
   transform: rotateY(180deg);
 }
 
-/*
-.card:hover .back-face {
-  transform: rotateY(0deg);
-}
-
-.card:hover .front-face {
-  transform: rotateY(-180deg);
-}
-*/
 .turnedback {
   transform: rotateY(0deg);
 }
 .turnedfront {
   transform: rotateY(-180deg);
+}
+.top-display{
+  background-color: aqua;
+  height: 30px;
+  width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.score {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+.moves {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+.time{
+  text-align: center;
 }
 
 @media (max-width: 335px) {
