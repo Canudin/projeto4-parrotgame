@@ -1,4 +1,4 @@
-/*
+/* ImagensAlternativas.mp4
 const birdArray = [
   "./img/goldenparrot.webp",
   "./img/parrot2.svg",
@@ -9,6 +9,7 @@ const birdArray = [
   "./img/unicorn.png"
 ];
 */
+
 const birdArray = [
   "./img/bobrossparrot.gif",
   "./img/explodyparrot.gif",
@@ -16,8 +17,8 @@ const birdArray = [
   "./img/metalparrot.gif",
   "./img/revertitparrot.gif",
   "./img/tripletsparrot.gif",
-  "./img/unicornparrot.gif"
-]
+  "./img/unicornparrot.gif",
+];
 
 const idArray = [0, 1, 2, 3, 4, 5, 6];
 let cardArray = [];
@@ -29,6 +30,7 @@ let card2;
 let moves = 0;
 let score = 0;
 let time = 0;
+let timerInterval;
 
 function random() {
   return Math.random() - 0.5;
@@ -39,7 +41,6 @@ function numberCards() {
   let m = 0;
   cardArray = [];
 
-  //Card Number Request
   table.innerHTML = "";
   cards = prompt("Qual o número de cartas que você quer jogar?");
 
@@ -48,7 +49,6 @@ function numberCards() {
     cards = prompt("Qual o número de cartas que você quer jogar?");
   }
 
-  //Card Array Generation
   const loop = cards / 2;
   while (n < loop) {
     cardArray.push(`${idArray[n]}`);
@@ -73,6 +73,8 @@ function numberCards() {
 }
 
 function turned(element) {
+  //while (score < cards / 2) {
+  //timer();
   const back = element.querySelector(".back-face");
   const front = element.querySelector(".front-face");
   element.classList.add("clicked");
@@ -98,6 +100,11 @@ function turned(element) {
     moves++;
     document.querySelector(".moves").innerHTML = `Moves: ${moves}`;
   }
+  //}
+  //alert(`
+  //Congrats! You beat the game in ${moves} moves!
+  //Your total time was: ${time}
+  //`)
 }
 
 function unturn() {
@@ -110,3 +117,13 @@ function unturn() {
     back.classList.remove("turnedback");
   }
 }
+/*
+function timer() {
+  document.querySelector(".time").innerHTML = time;
+  timerInterval = setInterval(timerIncrease, 1000);
+}
+function timerIncrease() {
+  time++;
+  document.querySelector(".time").innerHTML = time;
+}
+*/
