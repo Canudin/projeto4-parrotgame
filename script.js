@@ -1,3 +1,4 @@
+/*
 const birdArray = [
   "./img/goldenparrot.webp",
   "./img/parrot2.svg",
@@ -5,8 +6,19 @@ const birdArray = [
   "./img/parrot6.svg",
   "./img/quack.svg",
   "./img/cloudcorn.png",
-  "./img/unicorn.png",
+  "./img/unicorn.png"
 ];
+*/
+const birdArray = [
+  "./img/bobrossparrot.gif",
+  "./img/explodyparrot.gif",
+  "./img/fiestaparrot.gif",
+  "./img/metalparrot.gif",
+  "./img/revertitparrot.gif",
+  "./img/tripletsparrot.gif",
+  "./img/unicornparrot.gif"
+]
+
 const idArray = [0, 1, 2, 3, 4, 5, 6];
 let cardArray = [];
 let cards = 0;
