@@ -25,12 +25,14 @@ let cardArray = [];
 let cards = 0;
 const table = document.querySelector(".table");
 let clicks = document.querySelectorAll(".clicked");
-let card1;
-let card2;
+let card1 = null;
+let card2 = null;
 let moves = 0;
 let score = 0;
 let time = 0;
 let timerInterval;
+let timerStart = false;
+let ended = false;
 
 function random() {
   return Math.random() - 0.5;
@@ -73,8 +75,13 @@ function numberCards() {
 }
 
 function turned(element) {
-  //while (score < cards / 2) {
-  //timer();
+  if (card2 !== null || ended) {
+    return;
+  }
+  if (!timerStart) {
+    timerStart = true;
+    timer();
+  }
   const back = element.querySelector(".back-face");
   const front = element.querySelector(".front-face");
   element.classList.add("clicked");
@@ -86,28 +93,30 @@ function turned(element) {
     card2 = clicks[1].querySelector(".front-face");
     card1class = card1.classList[2];
     card2class = card2.classList[2];
-    if (card1class === card2class) {
+    if (card1class === card2class /*&& card1.hasAttribute("onclick") && card2.hasAttribute("onclick")*/) {
       card1.removeAttribute("onclick");
       card2.removeAttribute("onclick");
       score++;
       document.querySelector(".score").innerHTML = `Score: ${score}/${cards / 2}`;
       clicks[0].classList.remove("clicked");
       clicks[1].classList.remove("clicked");
+      card1 = null;
+      card2 = null;
     }
     if (card1class !== card2class) {
       setTimeout(unturn, 1000);
     }
     moves++;
     document.querySelector(".moves").innerHTML = `Moves: ${moves}`;
+    if (score === cards / 2) {
+      gameEnd();
+    }
   }
-  //}
-  //alert(`
-  //Congrats! You beat the game in ${moves} moves!
-  //Your total time was: ${time}
-  //`)
 }
 
 function unturn() {
+  card1 = null;
+  card2 = null;
   const element = document.querySelectorAll(".clicked");
   for (let n = 0; n < element.length; n++) {
     const back = element[n].querySelector(".back-face");
@@ -117,7 +126,7 @@ function unturn() {
     back.classList.remove("turnedback");
   }
 }
-/*
+
 function timer() {
   document.querySelector(".time").innerHTML = time;
   timerInterval = setInterval(timerIncrease, 1000);
@@ -126,4 +135,31 @@ function timerIncrease() {
   time++;
   document.querySelector(".time").innerHTML = time;
 }
-*/
+function timerStop() {
+  clearInterval(timerInterval);
+}
+
+function gameEnd() {
+  ended = true;
+  alert(`
+    Parabéns! Você venceu em ${moves} jogadas!
+    Seu tempo total foi ${time} segundos!
+    `);
+  card1 = null;
+  card2 = null;
+  moves = 0;
+  score = 0;
+  time = 0;
+  timerInterval = undefined;
+  timerStart = false;
+  cardArray = [];
+  cards = 0;
+  let newGame = prompt("Deseja iniciar um novo jogo?");
+  if (newGame === "sim") {
+    numberCards();
+  }
+  if (newGame === "não") {
+    timerStop();
+    return;
+  }
+}
